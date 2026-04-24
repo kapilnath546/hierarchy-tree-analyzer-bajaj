@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tree Hierarchy Analyzer</title>
+  <meta name="description" content="Paste parent-child relationships and instantly see the tree structure, detect cycles, and catch invalid entries." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <circle cx="11" cy="3.5" r="2.5" fill="#2563eb"/>
+          <circle cx="4"  cy="17"  r="2.5" fill="#2563eb"/>
+          <circle cx="18" cy="17"  r="2.5" fill="#2563eb"/>
+          <line x1="11" y1="6"  x2="4"  y2="14.5" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="11" y1="6"  x2="18" y2="14.5" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        TreeAnalyzer
+      </a>
+      <span class="nav-tag">Hierarchy Tool</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero-section">
+    <div class="container">
+      <p class="hero-eyebrow">Node Relationship Visualizer</p>
+      <h1 class="hero-title">Analyze <span class="accent">Tree Hierarchies</span></h1>
+      <p class="hero-desc">
+        Paste your parent→child edges, hit Analyze, and instantly get structured trees,
+        cycle detection, and a clean breakdown of invalid entries.
+      </p>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container main">
+
+    <!-- Input panel -->
+    <section class="panel" aria-label="Input">
+      <div class="panel-head">
+        <h2 class="panel-title">Input Edges</h2>
+        <p class="panel-sub">Comma-separated or one per line &mdash; e.g. <code>A-&gt;B, B-&gt;C</code></p>
+      </div>
+
+      <textarea
+        id="node-input"
+        class="edge-input"
+        placeholder="A->B, A->C, B->D&#10;X->Y, Y->Z, Z->X"
+        rows="6"
+        spellcheck="false"
+        aria-label="Node relationships"
+      ></textarea>
+
+      <div class="input-footer">
+        <button id="load-example-btn" class="link-btn" type="button">Load sample data</button>
+        <div class="action-btns">
+          <button id="clear-btn" class="btn btn-ghost" type="button" disabled>Clear</button>
+          <button id="submit-btn" class="btn btn-primary" type="button">
+            <span class="btn-text">Analyze</span>
+            <span class="btn-spin" aria-hidden="true"><span class="spinner"></span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error -->
+    <div id="error-box" class="error-box hidden" role="alert">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9 9a1 1 0 012 0v4a1 1 0 01-2 0V9zm1-5a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/>
+      </svg>
+      <span id="error-msg"></span>
+    </div>
+
+    <!-- Stats row -->
+    <div id="stats-row" class="stats-row hidden" role="region" aria-label="Summary">
+      <div class="stat-box">
+        <span id="s-trees" class="stat-num">0</span>
+        <span class="stat-lbl">Trees</span>
+      </div>
+      <div class="stat-box">
+        <span id="s-cycles" class="stat-num">0</span>
+        <span class="stat-lbl">Cycles</span>
+      </div>
+      <div class="stat-box">
+        <span id="s-root" class="stat-num">—</span>
+        <span class="stat-lbl">Largest Tree Root</span>
+      </div>
+      <div class="stat-box">
+        <span id="s-invalid" class="stat-num">0</span>
+        <span class="stat-lbl">Invalid Entries</span>
+      </div>
+    </div>
+
+    <!-- Hierarchies -->
+    <section id="hier-section" class="hidden" aria-label="Hierarchies">
+      <h2 class="section-heading">Trees &amp; Cycles</h2>
+      <div id="hier-grid" class="hier-grid"></div>
+    </section>
+
+    <!-- Invalid + Duplicates -->
+    <div id="chips-section" class="two-col hidden">
+
+      <div class="panel chips-panel">
+        <h3 class="chips-heading invalid-heading">Invalid Entries</h3>
+        <div id="invalid-list" class="chip-list"></div>
+      </div>
+
+      <div class="panel chips-panel">
+        <h3 class="chips-heading dup-heading">Duplicate Edges</h3>
+        <div id="dup-list" class="chip-list"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Tree Hierarchy Analyzer
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
