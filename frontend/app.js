@@ -2,7 +2,7 @@
 
 // ── Config ────────────────────────────────────────────────────────────────────
 // Point this at your deployed backend (no trailing slash, no /bfhl)
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'https://kapilnath-bfhl-api.onrender.com';
 
 const SAMPLE = [
   'A->B', 'A->C', 'B->D', 'C->E', 'E->F',
