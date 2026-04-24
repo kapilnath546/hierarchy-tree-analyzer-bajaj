@@ -1,6 +1,6 @@
 // Tree Hierarchy Analyzer — app.js
 
-// ── Config ────────────────────────────────────────────────────────────────────
+// 
 // Point this at your deployed backend (no trailing slash, no /bfhl)
 const API_BASE = 'https://kapilnath-bfhl-api.onrender.com';
 
@@ -12,7 +12,7 @@ const SAMPLE = [
   'hello', '1->2', 'A->',
 ].join(', ');
 
-// ── DOM ───────────────────────────────────────────────────────────────────────
+// 
 const inputEl      = document.getElementById('node-input');
 const submitBtn    = document.getElementById('submit-btn');
 const clearBtn     = document.getElementById('clear-btn');
@@ -31,19 +31,19 @@ const sCycles  = document.getElementById('s-cycles');
 const sRoot    = document.getElementById('s-root');
 const sInvalid = document.getElementById('s-invalid');
 
-// ── Parse ─────────────────────────────────────────────────────────────────────
+// 
 function parseEdges(raw) {
   return raw.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
 }
 
-// ── Loading state ─────────────────────────────────────────────────────────────
+// 
 function setLoading(on) {
   submitBtn.classList.toggle('loading', on);
   submitBtn.disabled = on;
   clearBtn.disabled  = on;
 }
 
-// ── Error display ─────────────────────────────────────────────────────────────
+// 
 function showError(msg) {
   errorMsg.textContent = msg;
   errorBox.classList.remove('hidden');
@@ -52,7 +52,7 @@ function hideError() {
   errorBox.classList.add('hidden');
 }
 
-// ── Build tree DOM ────────────────────────────────────────────────────────────
+// 
 function buildTreeUl(obj, depth) {
   const ul = document.createElement('ul');
   ul.className = 'tree-ul' + (depth > 0 ? ' nested' : '');
@@ -84,7 +84,7 @@ function buildTreeUl(obj, depth) {
   return ul;
 }
 
-// ── Build hierarchy card ──────────────────────────────────────────────────────
+// 
 function buildCard(h, idx) {
   const isCycle = !!h.has_cycle;
 
@@ -154,7 +154,7 @@ function buildCard(h, idx) {
   return card;
 }
 
-// ── Render chips ──────────────────────────────────────────────────────────────
+// 
 function renderChips(container, items, cls) {
   container.innerHTML = '';
   if (!items || items.length === 0) {
@@ -173,7 +173,7 @@ function renderChips(container, items, cls) {
   });
 }
 
-// ── Render full response ──────────────────────────────────────────────────────
+// 
 function renderResult(data) {
   // stats
   sTrees.textContent   = data.summary.total_trees;
@@ -200,7 +200,7 @@ function renderResult(data) {
   statsRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// ── Submit ────────────────────────────────────────────────────────────────────
+// 
 async function submit() {
   const raw = inputEl.value.trim();
   if (!raw) { showError('Please enter at least one edge before submitting.'); return; }
@@ -228,7 +228,7 @@ async function submit() {
   }
 }
 
-// ── Events ────────────────────────────────────────────────────────────────────
+// 
 submitBtn.addEventListener('click', submit);
 
 inputEl.addEventListener('keydown', e => {

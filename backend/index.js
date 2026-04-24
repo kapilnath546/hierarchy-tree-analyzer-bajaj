@@ -3,16 +3,16 @@ const cors = require('cors');
 
 const app = express();
 
-// ── Middleware ────────────────────────────────────────────────────────────────
+// 
 app.use(cors());
 app.use(express.json());
 
-// ── Constants — personalise these ────────────────────────────────────────────
+// 
 const USER_ID            = 'kapilbajaj_24042000';
 const EMAIL_ID           = 'kapil.bajaj@college.edu';
 const COLLEGE_ROLL_NUMBER = '21CS1001';
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// 
 
 /**
  * Validate an edge format: exactly one "->", single uppercase A-Z on both sides,
@@ -78,7 +78,7 @@ function treeDepth(node, childrenMap) {
   return 1 + Math.max(...kids.map(k => treeDepth(k, childrenMap)));
 }
 
-// ── Core Processing ───────────────────────────────────────────────────────────
+// 
 
 function processData(rawData) {
   const invalidEntries = [];
@@ -214,7 +214,7 @@ function processData(rawData) {
   return { invalidEntries, duplicateEdges, hierarchies, summary };
 }
 
-// ── Route ─────────────────────────────────────────────────────────────────────
+// 
 
 app.post('/bfhl', (req, res) => {
   try {
@@ -244,7 +244,7 @@ app.post('/bfhl', (req, res) => {
 // Health-check
 app.get('/', (_req, res) => res.json({ status: 'ok', message: 'Hierarchy Tree Analyzer API is running.' }));
 
-// ── Start ─────────────────────────────────────────────────────────────────────
+// 
 // Only start server if this file is run directly (useful for testing)
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
